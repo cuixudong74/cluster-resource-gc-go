@@ -1,0 +1,83 @@
+{
+  "taken_at": "2026-10-01T00:00:00Z",
+  "resources": [
+    {
+      "id": "ns-prod",
+      "kind": "Namespace",
+      "name": "prod",
+      "created_at": "2025-01-01T00:00:00Z",
+      "last_used": "2026-09-30T00:00:00Z"
+    },
+    {
+      "id": "deploy-web",
+      "kind": "Deployment",
+      "namespace": "prod",
+      "name": "web",
+      "owner": "ns-prod",
+      "created_at": "2025-01-01T00:00:00Z",
+      "last_used": "2026-09-30T00:00:00Z",
+      "refs": [
+        "cm-web"
+      ]
+    },
+    {
+      "id": "cm-web",
+      "kind": "ConfigMap",
+      "namespace": "prod",
+      "name": "web-config",
+      "created_at": "2025-01-01T00:00:00Z",
+      "last_used": "2026-09-30T00:00:00Z"
+    },
+    {
+      "id": "cm-old",
+      "kind": "ConfigMap",
+      "namespace": "prod",
+      "name": "old-config",
+      "created_at": "2025-01-01T00:00:00Z",
+      "last_used": "2025-06-01T00:00:00Z"
+    },
+    {
+      "id": "pod-a",
+      "kind": "Pod",
+      "namespace": "prod",
+      "name": "a",
+      "refs": [
+        "pod-b"
+      ],
+      "created_at": "2025-01-01T00:00:00Z",
+      "last_used": "2025-06-01T00:00:00Z"
+    },
+    {
+      "id": "pod-b",
+      "kind": "Pod",
+      "namespace": "prod",
+      "name": "b",
+      "refs": [
+        "pod-a"
+      ],
+      "created_at": "2025-01-01T00:00:00Z",
+      "last_used": "2025-06-01T00:00:00Z"
+    },
+    {
+      "id": "pv-orphan",
+      "kind": "PersistentVolume",
+      "name": "orphan",
+      "refs": [
+        "pvc-gone"
+      ],
+      "created_at": "2025-01-01T00:00:00Z",
+      "last_used": "2025-06-01T00:00:00Z"
+    },
+    {
+      "id": "secret-keep",
+      "kind": "Secret",
+      "namespace": "prod",
+      "name": "keep",
+      "labels": {
+        "gc.io/protect": "true"
+      },
+      "created_at": "2025-01-01T00:00:00Z",
+      "last_used": "2025-06-01T00:00:00Z"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "roots": {"root_kinds": ["Namespace"]},
+  "policy": {
+    "protected_label": "gc.io/protect",
+    "grace_period": 86400000000000,
+    "rules": [
+      {"name": "protect-kube-system", "namespace": "kube-system"}
+    ]
+  },
+  "plan": {
+    "classify": {"IdleThreshold": 0}
+  }
+}
