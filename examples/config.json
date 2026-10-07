@@ -1,0 +1,40 @@
+{
+  "source": "memory-file",
+  "snapshotPath": "examples/snapshot.json",
+  "stateDir": ".gc-state",
+  "auditPath": ".gc-state/audit.jsonl",
+  "dryRun": true,
+  "concurrency": 2,
+  "batchSize": 20,
+  "maxAttempts": 3,
+  "requestsPerSecond": 5,
+  "timeout": "10m",
+  "principal": {
+    "name": "local-operator",
+    "roles": ["gc-admin"]
+  },
+  "policy": {
+    "gracePeriod": "24h",
+    "idleThreshold": "720h",
+    "protectedLabel": "resource-gc/protected",
+    "protectedAnnotation": "resource-gc-io/protected",
+    "protectedIDs": [],
+    "rules": [
+      {
+        "id": "protect-production-secrets",
+        "description": "Never delete production Secrets automatically.",
+        "selector": {
+          "kinds": ["Secret"],
+          "namespaces": ["production"]
+        }
+      },
+      {
+        "id": "protect-young-configmaps",
+        "description": "Newly created ConfigMaps remain in their grace window.",
+        "selector": {"kinds": ["ConfigMap"]},
+        "minAge": "1h"
+      }
+    ]
+  },
+  "approvedManual": []
+}
